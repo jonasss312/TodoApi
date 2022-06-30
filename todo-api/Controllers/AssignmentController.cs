@@ -62,7 +62,7 @@ namespace todo_api.Controllers
             if(foundAssignment == null)
                 return BadRequest("Assignment not found.");
             await _assignmentRepo.Delete(foundAssignment);
-            return NoContent();ted
+            return NoContent();
         }
     }
 }
