@@ -4,20 +4,21 @@ namespace todo_api.Models
 {
     public class User
     {
-        [Key]
         [Required]
         public int Id { get; set; }
         [Required]
         public string Email { get; set; } = String.Empty;
         [Required]
-        public string Password { get; set; } = String.Empty;
+        public byte[] PasswordHash { get; set; }
         [Required]
+        public byte[] PasswordSalt { get; set; }
+        /*[Required]
         public RoleType Role { get; set; }
 
         public enum RoleType
         {
             Admin,
             User
-        }
+        }*/
     }
 }
