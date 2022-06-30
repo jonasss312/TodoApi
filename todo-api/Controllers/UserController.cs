@@ -9,9 +9,9 @@ using todo_api.Models.Dtos;
 
 namespace todo_api.Controllers
 {
-    [Route("api/users/")]
+    [Route(Constants.API_PATH + Constants.USERS_PATH)]
     [ApiController]
-    public class UserController:ControllerBase
+    public class UserController : ControllerBase
     {
         private UserRepo _userRepo;
         private IConfiguration _configuration;
@@ -27,8 +27,9 @@ namespace todo_api.Controllers
         public async Task<ActionResult<User>> Register(UserDto registerUserDto)
         {
             var user = await _userRepo.GetUserByEmail(registerUserDto.Email);
+
             if(user != null)
-                return BadRequest("User already exists");
+                return BadRequest(Constants.ERROR_CANNOT_CREATE_NEW_USER);
 
             User newUser = CreateNewUser(registerUserDto);
             await _userRepo.Insert(newUser);
@@ -61,11 +62,12 @@ namespace todo_api.Controllers
         public async Task<ActionResult<string>> Login(UserDto loginDto)
         {
             var user = await _userRepo.GetUserByEmail(loginDto.Email);
+
             if(user == null)
-                return BadRequest("Username or password invalid");
+                return BadRequest(Constants.INVALID_LOGIN_DETAILS);
 
             if(!VerifyPasswordHash(loginDto.Password, user.PasswordHash, user.PasswordSalt))
-                return BadRequest("Username or password invalid");
+                return BadRequest(Constants.INVALID_LOGIN_DETAILS);
 
             return Ok(CreateToken(user));
         }
