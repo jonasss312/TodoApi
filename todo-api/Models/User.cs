@@ -12,13 +12,5 @@ namespace todo_api.Models
         public byte[] PasswordHash { get; set; }
         [Required]
         public byte[] PasswordSalt { get; set; }
-        /*[Required]
-        public RoleType Role { get; set; }
-
-        public enum RoleType
-        {
-            Admin,
-            User
-        }*/
     }
 }
