@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 using todo_api.Data.Repos;
 using todo_api.Models;
+using todo_api.Models.Dtos;
 using todo_api.Usecases.Interfaces;
 
 namespace todo_api.Controllers
@@ -28,7 +29,7 @@ namespace todo_api.Controllers
         }
 
         [HttpPatch(Constants.ASSIGNMENT_ID)]
-        public async Task<ActionResult<List<Assignment>>> UpdateAssignment(int userId, int assignmentId, Assignment newAssignment)
+        public async Task<ActionResult<List<Assignment>>> UpdateAssignment(int userId, int assignmentId, AssignmentDto newAssignment)
         {
             var foundAssignment = await _getUserAssignmentUC.GetUserAssignment(userId, assignmentId);
 
@@ -43,10 +44,10 @@ namespace todo_api.Controllers
             return Ok(foundAssignment);
         }
 
-        private bool ValidateAssignmentData(Assignment assignment)
+        private bool ValidateAssignmentData(AssignmentDto newAssignment)
         {
-            return String.IsNullOrEmpty(assignment.Name) &&
-                typeof(Assignment.StatusType).IsInstanceOfType(assignment.Status);
+            return String.IsNullOrEmpty(newAssignment.Name) &&
+                typeof(Assignment.StatusType).IsInstanceOfType(newAssignment.Status);
         }
     }
 }

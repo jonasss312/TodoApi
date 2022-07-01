@@ -1,5 +1,6 @@
 ﻿using todo_api.Data.Repos;
 using todo_api.Models;
+using todo_api.Models.Dtos;
 using todo_api.Usecases.Interfaces;
 
 namespace todo_api.Usecases.Implementations
@@ -13,7 +14,7 @@ namespace todo_api.Usecases.Implementations
             _assignmentRepo = assignmentRepo;
         }
 
-        public Task UpdateAssignment(Assignment oldAssignment, Assignment newAssignment)
+        public Task UpdateAssignment(Assignment oldAssignment, AssignmentDto newAssignment)
         {
             oldAssignment.Name = newAssignment.Name;
             oldAssignment.Status = newAssignment.Status;
