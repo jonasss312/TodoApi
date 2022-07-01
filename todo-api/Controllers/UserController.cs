@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -31,8 +30,6 @@ namespace todo_api.Controllers
 
             if(user != null)
                 return BadRequest(Constants.ERROR_CANNOT_CREATE_NEW_USER);
-            if(!new EmailAddressAttribute().IsValid(registerUserDto.Email))
-                return BadRequest(Constants.ERROR_INVALID_EMAIL);
 
             User newUser = CreateNewUser(registerUserDto);
             await _userRepo.Insert(newUser);
@@ -67,10 +64,10 @@ namespace todo_api.Controllers
             var user = await _userRepo.GetUserByEmail(loginDto.Email);
 
             if(user == null)
-                return BadRequest(Constants.ERROR_INVALID_LOGIN_DETAILS);
+                return BadRequest(Constants.INVALID_LOGIN_DETAILS);
 
             if(!VerifyPasswordHash(loginDto.Password, user.PasswordHash, user.PasswordSalt))
-                return BadRequest(Constants.ERROR_INVALID_LOGIN_DETAILS);
+                return BadRequest(Constants.INVALID_LOGIN_DETAILS);
 
             return Ok(CreateToken(user));
         }
