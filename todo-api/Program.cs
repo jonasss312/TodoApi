@@ -45,4 +45,8 @@ void AddUsecases(WebApplicationBuilder builder)
     builder.Services.AddTransient<CreateAssignmentUC, CreateAssignmentInteractor>();
     builder.Services.AddTransient<DeleteAssignmentUC, DeleteAssignmentInteractor>();
     builder.Services.AddTransient<UpdateAssignmentUC, UpdateAssignmentInteractor>();
+    builder.Services.AddTransient<CreateNewUserUC, CreateNewUserInteractor>();
+    builder.Services.AddTransient<GetUserByEmailUC, GetUserInteractor>();
+    builder.Services.AddTransient<CreateTokenUC, CreateTokenInteractor>();
+    builder.Services.AddTransient<VerifyUserPasswordUC, VerifyUserPasswordInteractor>();
 }
