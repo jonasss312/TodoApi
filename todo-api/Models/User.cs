@@ -12,5 +12,7 @@ namespace todo_api.Models
         public byte[] PasswordHash { get; set; }
         [Required]
         public byte[] PasswordSalt { get; set; }
+        [Required]
+        public string Role { get; set; } = String.Empty;
     }
 }

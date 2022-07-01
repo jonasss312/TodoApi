@@ -13,8 +13,9 @@ namespace todo_api.Usecases.Implementations
             _assignmentRepo = assignmentRepo;
         }
 
-        public Task CreateAssignment(Assignment assignment)
+        public Task CreateAssignment(Assignment assignment, int userId)
         {
+            assignment.UserId = userId;
             return _assignmentRepo.Insert(assignment);
         }
     }

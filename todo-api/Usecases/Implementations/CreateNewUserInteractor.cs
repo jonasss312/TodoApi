@@ -23,7 +23,8 @@ namespace todo_api.Usecases.Implementations
             {
                 Email = userDto.Email,
                 PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt
+                PasswordSalt = passwordSalt,
+                Role = Constants.USER_ROLE
             };
 
             return _userRepo.Insert(newUser);

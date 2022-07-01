@@ -31,7 +31,8 @@ namespace todo_api.Usecases.Implementations
         {
             return new List<Claim>
             {
-                new Claim(ClaimTypes.Email, user.Email)
+                new Claim(ClaimTypes.Role, user.Role),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
             };
         }
 

@@ -2,9 +2,12 @@
 {
     public static class Constants
     {
-        public const string ERROR_INVALID_LOGIN_DETAILS = "Username or password invalid";
-        public const string ERROR_CANNOT_CREATE_NEW_USER = "Username or password invalid";
+        public const string ERROR_INVALID_LOGIN_DETAILS = "Username or password invalid.";
+        public const string ERROR_PASSWORD_TOO_SHORT = "Password must be atleast 12 symbols.";
+        public const string ERROR_CANNOT_CREATE_NEW_USER = "Username or password invalid.";
         public const string ERROR_ASSIGNMENT_NOT_FOUND = "Assignment not found.";
+        public const string ERROR_BAD_USER = "You have no permission.";
+        public const string ERROR_NOT_ASSIGNMENT_CREATOR = "This is not your assignment.";
         public const string ERROR_ASSIGNMENT_VALIDATION = "Assignment name and status required";
         public const string ERROR_INVALID_EMAIL = "Email is not valid"; 
 
@@ -18,5 +21,7 @@
         public const string LOGIN_COMMAND = "login";
         public const string REGISTER_COMMAND = "register";
 
+        public const string ADMIN_ROLE = "admin";
+        public const string USER_ROLE = "user";
     }
 }
