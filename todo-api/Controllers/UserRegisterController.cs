@@ -35,6 +35,8 @@ namespace todo_api.Controllers
         {
             var user = await _getUserByEmailUC.GetUserByEmail(registerUserDto.Email);
 
+            if(registerUserDto.Password.Length < 12)
+                return BadRequest(Constants.ERROR_PASSWORD_TOO_SHORT);
             if(user != null)
                 return BadRequest(Constants.ERROR_CANNOT_CREATE_NEW_USER);
             if(!new EmailAddressAttribute().IsValid(registerUserDto.Email))

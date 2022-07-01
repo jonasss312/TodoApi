@@ -4,6 +4,6 @@ namespace todo_api.Usecases.Interfaces
 {
     public interface CreateAssignmentUC
     {
-        Task CreateAssignment(Assignment assignment);
+        Task CreateAssignment(Assignment assignment, int userId);
     }
 }
