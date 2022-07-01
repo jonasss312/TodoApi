@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using todo_api.Data.Repos;
 using todo_api.Models;
+using todo_api.Models.Dtos;
 using todo_api.Usecases.Interfaces;
 
 namespace todo_api.Controllers
@@ -24,22 +25,22 @@ namespace todo_api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Assignment>> AddAssignment(int userId, Assignment assignment)
+        public async Task<ActionResult<Assignment>> AddAssignment(int userId, AssignmentDto assignmentDto)
         {
             if(_verifyUserIdOrAdminUC.VerifyUserIdOrAdmin(User.Claims, userId))
                 return BadRequest(Constants.ERROR_BAD_USER);
 
-            if(!ValidateAssignmentData(assignment))
+            if(!ValidateAssignmentData(assignmentDto))
                 return BadRequest(Constants.ERROR_ASSIGNMENT_VALIDATION);
 
-            await _createAssignmentUC.CreateAssignment(assignment, userId);
+            await _createAssignmentUC.CreateAssignment(assignmentDto, userId, out Assignment assignment);
             return Ok(assignment);
         }
 
-        private bool ValidateAssignmentData(Assignment assignment)
+        private bool ValidateAssignmentData(AssignmentDto assignmentDto)
         {
-            return !String.IsNullOrEmpty(assignment.Name) &&
-                typeof(Assignment.StatusType).IsInstanceOfType(assignment.Status);
+            return !String.IsNullOrEmpty(assignmentDto.Name) &&
+                typeof(Assignment.StatusType).IsInstanceOfType(assignmentDto.Status);
         }
     }
 }

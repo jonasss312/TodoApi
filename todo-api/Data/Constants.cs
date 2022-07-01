@@ -20,6 +20,7 @@
 
         public const string LOGIN_COMMAND = "login";
         public const string REGISTER_COMMAND = "register";
+        public const string CHANGE_PASSWORD_COMMAND = "changePassword";
 
         public const string ADMIN_ROLE = "admin";
         public const string USER_ROLE = "user";
