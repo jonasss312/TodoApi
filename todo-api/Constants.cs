@@ -28,7 +28,7 @@
 
         public const string LOGIN_COMMAND = "login";
         public const string REGISTER_COMMAND = "register";
-        public const string SEND_RESET_PASSWORD_MAIL = "resetPasswordMail";
+        public const string SEND_RESET_PASSWORD_MAIL = "sendMailResetPassword";
         public const string CHANGE_PASSWORD_COMMAND = "changePassword";
 
         public const string ADMIN_ROLE = "admin";

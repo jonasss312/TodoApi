@@ -16,10 +16,10 @@ namespace todo_api.Gateway.Implementations
 
         public bool Send(string toMail, string mailBody)
         {
-            SmtpClient client = SetupClient();
             try
             {
-                client.Send("7874694984264a@gmail.com", toMail, "RECOVERY LINK", mailBody);
+                SmtpClient client = SetupClient();
+                client.Send(_configuration.GetSection("MailFromAdress").Value, toMail, "RECOVERY LINK", mailBody);
                 return true;
             }
             catch(Exception ex)
@@ -31,9 +31,9 @@ namespace todo_api.Gateway.Implementations
 
         private SmtpClient SetupClient()
         {
-            return new SmtpClient("smtp.gmail.com", 587)
+            return new SmtpClient(_configuration.GetSection("MailHost").Value, int.Parse(_configuration.GetSection("MailPort").Value))
             {
-                Credentials = new NetworkCredential("7874694984264a@gmail.com", "uclhsuarornlwyle"),
+                Credentials = new NetworkCredential(_configuration.GetSection("MailFromAdress").Value, _configuration.GetSection("MailPassword").Value),
                 EnableSsl = true
             };
         }
