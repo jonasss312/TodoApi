@@ -33,7 +33,7 @@ namespace todo_api.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Assignment>>> GetAll(int userId)
         {
-            if (_verifyUserIdOrAdminUC.VerifyUserIdOrAdmin(User.Claims, userId))
+            if (!_verifyUserIdOrAdminUC.VerifyUserIdOrAdmin(User.Claims, userId))
                 return BadRequest(Constants.ERROR_BAD_USER);
             return Ok(await _getAllUserAssignmentsUC.GetAllUserAssignments(userId));
         }
@@ -41,7 +41,7 @@ namespace todo_api.Controllers
         [HttpGet(Constants.ASSIGNMENT_ID)]
         public async Task<ActionResult<Assignment>> GetAssignment(int userId, int assignmentId)
         {
-            if(_verifyUserIdOrAdminUC.VerifyUserIdOrAdmin(User.Claims, userId))
+            if(!_verifyUserIdOrAdminUC.VerifyUserIdOrAdmin(User.Claims, userId))
                 return BadRequest(Constants.ERROR_BAD_USER);
 
             var foundAssignment = await _getUserAssignmentUC.GetUserAssignment(userId, assignmentId);

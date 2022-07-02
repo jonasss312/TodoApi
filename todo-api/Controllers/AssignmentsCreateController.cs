@@ -27,7 +27,7 @@ namespace todo_api.Controllers
         [HttpPost]
         public async Task<ActionResult<Assignment>> AddAssignment(int userId, AssignmentDto assignmentDto)
         {
-            if(_verifyUserIdOrAdminUC.VerifyUserIdOrAdmin(User.Claims, userId))
+            if(!_verifyUserIdOrAdminUC.VerifyUserIdOrAdmin(User.Claims, userId))
                 return BadRequest(Constants.ERROR_BAD_USER);
 
             if(!ValidateAssignmentData(assignmentDto))
