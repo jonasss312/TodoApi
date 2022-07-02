@@ -29,8 +29,6 @@ namespace todo_api.Controllers
             var user = await _getUserByEmailUC.GetUserByEmail(loginDto.Email);
             if(user == null)
                 return BadRequest(Constants.ERROR_INVALID_LOGIN_DETAILS);
-            if(loginDto.Password.Length < 12)
-                return BadRequest(Constants.ERROR_PASSWORD_TOO_SHORT);
             if(!_verifyUserPasswordUC.VerifyUserPassword(loginDto.Password, user.PasswordHash, user.PasswordSalt))
                 return BadRequest(Constants.ERROR_INVALID_LOGIN_DETAILS);
 

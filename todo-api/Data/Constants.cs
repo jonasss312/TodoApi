@@ -2,6 +2,8 @@
 {
     public static class Constants
     {
+        public const string SERVER_URL = "https://localhost:7265/";
+
         public const string ERROR_INVALID_LOGIN_DETAILS = "Username or password invalid.";
         public const string ERROR_USER_DOES_NOT_EXISTS = "Email not found.";
         public const string ERROR_PASSWORD_TOO_SHORT = "Password must be atleast 12 symbols.";
@@ -13,6 +15,7 @@
         public const string ERROR_INVALID_EMAIL = "Email is not valid.";
         public const string ERROR_SENDING_EMAIL = "Email was not sent.";
         public const string SUCCESS_EMAIL_SENT = "Email was sent.";
+        public const string SUCCESS_PASSWORD_CAHNGED = "Password was changed.";
 
         public const string API_PATH = "api/";
         public const string USERS_PATH = "users/";
@@ -20,10 +23,13 @@
 
         public const string USER_ID = "{userId}";
         public const string ASSIGNMENT_ID = "{assignmentId}";
+        public const string TOKEN = "{token}";
+        public const string PASSWORD = "{password}";
 
         public const string LOGIN_COMMAND = "login";
         public const string REGISTER_COMMAND = "register";
-        public const string RESET_PASSWORD_COMMAND = "resetPassword";
+        public const string SEND_RESET_PASSWORD_MAIL = "resetPasswordMail";
+        public const string CHANGE_PASSWORD_COMMAND = "changePassword";
 
         public const string ADMIN_ROLE = "admin";
         public const string USER_ROLE = "user";

@@ -13,9 +13,12 @@ namespace todo_api.Usecases.Implementations
             _mailGW = mailGW;
         }
 
-        public bool Send()
+        public bool Send(string toMail, string token)
         {
-            return _mailGW.Send("7874694984264a@gmail.com", "TEST");
+            string changePasswordPath = Constants.SERVER_URL + Constants.API_PATH + Constants.USERS_PATH +
+                Constants.CHANGE_PASSWORD_COMMAND + "/" + token + "/YourNewPasswordHere";
+
+            return _mailGW.Send(toMail, changePasswordPath);
         }
     }
 }
