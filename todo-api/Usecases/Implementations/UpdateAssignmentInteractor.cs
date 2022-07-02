@@ -1,4 +1,4 @@
-﻿using todo_api.Data.Repos;
+﻿using todo_api.Gateway.Interfaces;
 using todo_api.Models;
 using todo_api.Models.Dtos;
 using todo_api.Usecases.Interfaces;
@@ -7,11 +7,11 @@ namespace todo_api.Usecases.Implementations
 {
     public class UpdateAssignmentInteractor : UpdateAssignmentUC
     {
-        private AssignmentRepo _assignmentRepo;
+        private AssignmentsGW _assignmentsGW;
 
-        public UpdateAssignmentInteractor(AssignmentRepo assignmentRepo)
+        public UpdateAssignmentInteractor(AssignmentsGW assignmentsGW)
         {
-            _assignmentRepo = assignmentRepo;
+            _assignmentsGW = assignmentsGW;
         }
 
         public Task UpdateAssignment(Assignment oldAssignment, AssignmentDto newAssignment)
@@ -19,7 +19,7 @@ namespace todo_api.Usecases.Implementations
             oldAssignment.Name = newAssignment.Name;
             oldAssignment.Status = newAssignment.Status;
 
-            return _assignmentRepo.Update(oldAssignment);
+            return _assignmentsGW.Update(oldAssignment);
         }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using todo_api.Data.Repos;
 using todo_api.Models;
 using todo_api.Models.Dtos;
 using todo_api.Usecases.Interfaces;

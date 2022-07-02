@@ -1,17 +1,16 @@
-﻿using todo_api.Data.Repos;
+﻿using todo_api.Gateway.Interfaces;
 using todo_api.Models;
-using todo_api.Models.Dtos;
 using todo_api.Usecases.Interfaces;
 
 namespace todo_api.Usecases.Implementations
 {
     public class UpdateUserInteractor : UpdateUserPasswordUC
     {
-        private UserRepo _userRepo;
+        private UsersGW _usersGw;
 
-        public UpdateUserInteractor(UserRepo userRepo)
+        public UpdateUserInteractor(UsersGW usersGw)
         {
-            _userRepo = userRepo;
+            _usersGw = usersGw;
         }
 
         public Task UpdateUserPassword(User user, byte[] newPasswordHash, byte[] newPasswordSalt)
@@ -19,7 +18,7 @@ namespace todo_api.Usecases.Implementations
             user.PasswordHash = newPasswordHash;
             user.PasswordSalt = newPasswordSalt;
 
-            return _userRepo.Update(user);
+            return _usersGw.Update(user);
         }
     }
 }

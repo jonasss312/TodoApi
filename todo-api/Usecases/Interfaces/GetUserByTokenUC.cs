@@ -1,5 +1,4 @@
-﻿using System.Security.Claims;
-using todo_api.Models;
+﻿using todo_api.Models;
 
 namespace todo_api.Usecases.Interfaces
 {

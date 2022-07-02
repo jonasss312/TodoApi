@@ -1,4 +1,4 @@
-﻿namespace todo_api.Data.Interfaces
+﻿namespace todo_api.Gateway.Interfaces
 {
     public interface MailGW
     {

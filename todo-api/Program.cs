@@ -1,27 +1,25 @@
-global using todo_api.Data;
 global using Microsoft.EntityFrameworkCore;
-using todo_api.Data.Repos;
-using todo_api.Usecases.Interfaces;
-using todo_api.Usecases.Implementations;
+global using todo_api.Gateway;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using todo_api.Data.Interfaces;
-using todo_api.Data.Implementations;
+using System.Text;
+using todo_api.Gateway.Implementations;
+using todo_api.Gateway.Interfaces;
+using todo_api.Usecases.Implementations;
+using todo_api.Usecases.Interfaces;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 AddConnections(builder);
-AddRepos(builder);
 AddUsecases(builder);
 AddGateways(builder);
 AddAuthentication(builder);
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options=>
+builder.Services.AddSwaggerGen(options =>
 {
     AllowTokenInHeaderForSwagger(options);
 });
@@ -37,8 +35,8 @@ if(app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-
 }
+
 
 app.UseHttpsRedirection();
 app.UseCors(c => c.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
@@ -46,6 +44,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
+
 
 void AllowTokenInHeaderForSwagger(SwaggerGenOptions options)
 {
@@ -84,12 +83,6 @@ void AddConnections(WebApplicationBuilder builder)
     });
 }
 
-void AddRepos(WebApplicationBuilder builder)
-{
-    builder.Services.AddTransient<AssignmentRepo>();
-    builder.Services.AddTransient<UserRepo>();
-}
-
 void AddUsecases(WebApplicationBuilder builder)
 {
     builder.Services.AddTransient<GetAllUserAssignmentsUC, GetAllUserAssignmentsInteractor>();
@@ -111,6 +104,8 @@ void AddUsecases(WebApplicationBuilder builder)
 
 void AddGateways(WebApplicationBuilder builder)
 {
+    builder.Services.AddTransient<AssignmentsGW, AssignmentRepo>();
+    builder.Services.AddTransient<UsersGW, UserRepo>();
     builder.Services.AddTransient<MailGW, MailSender>();
     builder.Services.AddTransient<DatabaseSeeder>();
 }
@@ -119,7 +114,7 @@ void SeedData(IHost app)
 {
     var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
 
-    using (var scope = scopedFactory.CreateScope())
+    using(var scope = scopedFactory.CreateScope())
     {
         var service = scope.ServiceProvider.GetService<DatabaseSeeder>();
         service.Seed();

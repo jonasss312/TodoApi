@@ -1,6 +1,4 @@
-﻿using System.Net;
-using System.Net.Mail;
-using todo_api.Data.Interfaces;
+﻿using todo_api.Gateway.Interfaces;
 using todo_api.Usecases.Interfaces;
 
 namespace todo_api.Usecases.Implementations

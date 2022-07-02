@@ -1,4 +1,4 @@
-﻿using todo_api.Data.Repos;
+﻿using todo_api.Gateway.Interfaces;
 using todo_api.Models;
 using todo_api.Usecases.Interfaces;
 
@@ -6,16 +6,16 @@ namespace todo_api.Usecases.Implementations
 {
     public class GetUserAssignmentInteractor : GetUserAssignmentUC
     {
-        private AssignmentRepo _assignmentRepo;
+        private AssignmentsGW _assignmentsGW;
 
-        public GetUserAssignmentInteractor(AssignmentRepo assignmentRepo)
+        public GetUserAssignmentInteractor(AssignmentsGW assignmentsGW)
         {
-            _assignmentRepo = assignmentRepo;
+            _assignmentsGW = assignmentsGW;
         }
 
         public Task<Assignment> GetUserAssignment(int userId, int assignmentId)
         {
-            return _assignmentRepo.Get(userId, assignmentId);
+            return _assignmentsGW.Get(userId, assignmentId);
         }
     }
 }

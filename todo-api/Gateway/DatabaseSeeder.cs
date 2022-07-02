@@ -1,9 +1,7 @@
-﻿using System.Text;
-using todo_api.Data.Repos;
-using todo_api.Models;
+﻿using todo_api.Models;
 using todo_api.Usecases.Interfaces;
 
-namespace todo_api.Data
+namespace todo_api.Gateway
 {
     public class DatabaseSeeder
     {
