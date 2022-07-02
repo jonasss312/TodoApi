@@ -26,11 +26,13 @@ namespace todo_api.Data.Repos
             _context.Assignments.Add(assignment);
             await _context.SaveChangesAsync();
         }
+
         public async Task Update(Assignment assignment)
         {
             _context.Assignments.Update(assignment);
             await _context.SaveChangesAsync();
         }
+
         public async Task Delete(Assignment assignment)
         {
             _context.Assignments.Remove(assignment);

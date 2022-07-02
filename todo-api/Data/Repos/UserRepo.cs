@@ -1,5 +1,4 @@
 ﻿using todo_api.Models;
-using todo_api.Models.Dtos;
 
 namespace todo_api.Data.Repos
 {
@@ -15,6 +14,17 @@ namespace todo_api.Data.Repos
         public async Task<User> GetUserByEmail(string email)
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+        }
+
+        public async Task<User> GetUserById(int userId)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+        }
+
+        public async Task Update(User user)
+        {
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
         }
 
         public async Task Insert(User user)

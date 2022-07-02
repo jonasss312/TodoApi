@@ -15,10 +15,8 @@ namespace todo_api.Usecases.Implementations
             _userRepo = userRepo;
         }
 
-        public Task CreateNewUser(UserDto userDto, out User newUser)
+        public Task CreateNewUser(UserDto userDto, byte[] passwordHash, byte[] passwordSalt, out User newUser)
         {
-            CreatePasswordHash(userDto.Password, out byte[] passwordHash, out byte[] passwordSalt);
-
             newUser = new User
             {
                 Email = userDto.Email,
@@ -28,15 +26,6 @@ namespace todo_api.Usecases.Implementations
             };
 
             return _userRepo.Insert(newUser);
-        }
-
-        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
-        {
-            using(var hmac = new HMACSHA512())
-            {
-                passwordSalt = hmac.Key;
-                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-            }
         }
     }
 }

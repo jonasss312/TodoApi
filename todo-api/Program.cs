@@ -25,6 +25,7 @@ builder.Services.AddSwaggerGen(options=>
 {
     AllowTokenInHeaderForSwagger(options);
 });
+builder.Services.AddCors();
 
 var app = builder.Build();
 
@@ -36,6 +37,7 @@ if(app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors(c => c.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
@@ -99,6 +101,9 @@ void AddUsecases(WebApplicationBuilder builder)
     builder.Services.AddTransient<VerifyAssignmentCreatorOrAdminUC, VerifyAssignmentCreatorOrAdminInteractor>();
     builder.Services.AddTransient<VerifyUserIdOrAdminUC, VerifyUserIdOrAdminInteractor>();
     builder.Services.AddTransient<SendRecoveryEmailUC, SendRecoveryEmailInteractor>();
+    builder.Services.AddTransient<CreatePasswordHashUC, CreatePasswordHashInteractor>();
+    builder.Services.AddTransient<UpdateUserPasswordUC, UpdateUserInteractor>();
+    builder.Services.AddTransient<GetUserByTokenUC, GetUserInteractor>();
 }
 
 void AddGateways(WebApplicationBuilder builder)

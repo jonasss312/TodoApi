@@ -5,6 +5,6 @@ namespace todo_api.Usecases.Interfaces
 {
     public interface SendRecoveryEmailUC
     {
-        bool Send();
+        bool Send(string toMail, string token);
     }
 }
