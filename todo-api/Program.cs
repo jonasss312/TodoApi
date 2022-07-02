@@ -27,13 +27,17 @@ builder.Services.AddSwaggerGen(options=>
 });
 builder.Services.AddCors();
 
+
 var app = builder.Build();
+
+SeedData(app);
 
 // Configure the HTTP request pipeline.
 if(app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
 }
 
 app.UseHttpsRedirection();
@@ -42,7 +46,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
-
 
 void AllowTokenInHeaderForSwagger(SwaggerGenOptions options)
 {
@@ -109,4 +112,16 @@ void AddUsecases(WebApplicationBuilder builder)
 void AddGateways(WebApplicationBuilder builder)
 {
     builder.Services.AddTransient<MailGW, MailSender>();
+    builder.Services.AddTransient<DatabaseSeeder>();
+}
+
+void SeedData(IHost app)
+{
+    var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+
+    using (var scope = scopedFactory.CreateScope())
+    {
+        var service = scope.ServiceProvider.GetService<DatabaseSeeder>();
+        service.Seed();
+    }
 }

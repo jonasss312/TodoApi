@@ -46,7 +46,7 @@ namespace todo_api.Controllers
 
         private bool ValidateAssignmentData(AssignmentDto newAssignment)
         {
-            return String.IsNullOrEmpty(newAssignment.Name) &&
+            return !String.IsNullOrEmpty(newAssignment.Name) &&
                 typeof(Assignment.StatusType).IsInstanceOfType(newAssignment.Status);
         }
     }
