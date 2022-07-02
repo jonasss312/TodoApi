@@ -15,18 +15,15 @@ namespace todo_api.Controllers
     [ApiController]
     public class UserRegisterController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
         private readonly GetUserByEmailUC _getUserByEmailUC;
         private readonly CreateNewUserUC _createNewUserUC;
 
         public UserRegisterController(
-            IConfiguration configuration,
             GetUserByEmailUC getUserByEmailUC,
             CreateNewUserUC createNewUserUC)
         {
-            _configuration = configuration;
             _getUserByEmailUC = getUserByEmailUC;
-            _createNewUserUC = createNewUserUC;
+            _createNewUserUC = createNewUserUC; ;
         }
 
         [HttpPost]
@@ -37,11 +34,8 @@ namespace todo_api.Controllers
 
             if(registerUserDto.Password.Length < 12)
                 return BadRequest(Constants.ERROR_PASSWORD_TOO_SHORT);
-            if(user != null)
-                return BadRequest(Constants.ERROR_CANNOT_CREATE_NEW_USER);
             if(!new EmailAddressAttribute().IsValid(registerUserDto.Email))
                 return BadRequest(Constants.ERROR_INVALID_EMAIL);
-
 
             await _createNewUserUC.CreateNewUser(registerUserDto, out User newUser);
             return Ok(newUser);

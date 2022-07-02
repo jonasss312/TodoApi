@@ -9,6 +9,8 @@ using System.Text;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using todo_api.Data.Interfaces;
+using todo_api.Data.Implementations;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,7 @@ builder.Services.AddControllers();
 AddConnections(builder);
 AddRepos(builder);
 AddUsecases(builder);
+AddGateways(builder);
 AddAuthentication(builder);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options=>
@@ -95,4 +98,10 @@ void AddUsecases(WebApplicationBuilder builder)
     builder.Services.AddTransient<VerifyUserPasswordUC, VerifyUserPasswordInteractor>();
     builder.Services.AddTransient<VerifyAssignmentCreatorOrAdminUC, VerifyAssignmentCreatorOrAdminInteractor>();
     builder.Services.AddTransient<VerifyUserIdOrAdminUC, VerifyUserIdOrAdminInteractor>();
+    builder.Services.AddTransient<SendRecoveryEmailUC, SendRecoveryEmailInteractor>();
+}
+
+void AddGateways(WebApplicationBuilder builder)
+{
+    builder.Services.AddTransient<MailGW, MailSender>();
 }
