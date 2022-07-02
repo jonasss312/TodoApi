@@ -1,8 +1,8 @@
 ﻿using System.Net;
 using System.Net.Mail;
-using todo_api.Data.Interfaces;
+using todo_api.Gateway.Interfaces;
 
-namespace todo_api.Data.Implementations
+namespace todo_api.Gateway.Implementations
 {
     public class MailSender : MailGW
     {

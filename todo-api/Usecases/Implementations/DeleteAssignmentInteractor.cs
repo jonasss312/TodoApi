@@ -1,4 +1,4 @@
-﻿using todo_api.Data.Repos;
+﻿using todo_api.Gateway.Interfaces;
 using todo_api.Models;
 using todo_api.Usecases.Interfaces;
 
@@ -6,16 +6,16 @@ namespace todo_api.Usecases.Implementations
 {
     public class DeleteAssignmentInteractor : DeleteAssignmentUC
     {
-        private AssignmentRepo _assignmentRepo;
+        private AssignmentsGW _assignmentsGW;
 
-        public DeleteAssignmentInteractor(AssignmentRepo assignmentRepo)
+        public DeleteAssignmentInteractor(AssignmentsGW assignmentsGW)
         {
-            _assignmentRepo = assignmentRepo;
+            _assignmentsGW = assignmentsGW;
         }
 
         public Task DeleteAssignment(Assignment assignment)
         {
-            return _assignmentRepo.Delete(assignment);
+            return _assignmentsGW.Delete(assignment);
         }
     }
 }

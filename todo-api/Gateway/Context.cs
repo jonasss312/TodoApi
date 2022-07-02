@@ -1,7 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using todo_api.Models;
+﻿using todo_api.Models;
 
-namespace todo_api.Data
+namespace todo_api.Gateway
 {
     public class Context : DbContext
     {

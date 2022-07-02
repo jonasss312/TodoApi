@@ -1,4 +1,4 @@
-﻿namespace todo_api.Data
+﻿namespace todo_api
 {
     public static class Constants
     {

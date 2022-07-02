@@ -1,8 +1,9 @@
-﻿using todo_api.Models;
+﻿using todo_api.Gateway.Interfaces;
+using todo_api.Models;
 
-namespace todo_api.Data.Repos
+namespace todo_api.Gateway.Implementations
 {
-    public class UserRepo
+    public class UserRepo : UsersGW
     {
         private readonly Context _context;
 

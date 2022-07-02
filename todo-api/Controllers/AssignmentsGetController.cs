@@ -1,17 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using todo_api.Data.Repos;
 using todo_api.Models;
 using todo_api.Usecases.Interfaces;
-using static todo_api.Models.User;
 
 namespace todo_api.Controllers
 {
     [Route(Constants.API_PATH + Constants.USERS_PATH + Constants.USER_ID + "/" + Constants.ASSIGNMENTS_PATH)]
     [ApiController]
     [Authorize(Roles = Constants.ADMIN_ROLE + ", " + Constants.USER_ROLE)]
-    public class AssignmentsGetController: ControllerBase
+    public class AssignmentsGetController : ControllerBase
     {
         private readonly GetAllUserAssignmentsUC _getAllUserAssignmentsUC;
         private readonly GetUserAssignmentUC _getUserAssignmentUC;
@@ -25,7 +22,7 @@ namespace todo_api.Controllers
             VerifyUserIdOrAdminUC verifyUserIdOrAdminUC)
         {
             _getAllUserAssignmentsUC = getAllUserAssignmentsUC;
-            _getUserAssignmentUC= getUserAssignmentUC;
+            _getUserAssignmentUC = getUserAssignmentUC;
             _verifyAssignmentCreatorOrAdminUC = verifyAssignmentCreatorOrAdminUC;
             _verifyUserIdOrAdminUC = verifyUserIdOrAdminUC;
         }
@@ -33,7 +30,7 @@ namespace todo_api.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Assignment>>> GetAll(int userId)
         {
-            if (!_verifyUserIdOrAdminUC.VerifyUserIdOrAdmin(User.Claims, userId))
+            if(!_verifyUserIdOrAdminUC.VerifyUserIdOrAdmin(User.Claims, userId))
                 return BadRequest(Constants.ERROR_BAD_USER);
             return Ok(await _getAllUserAssignmentsUC.GetAllUserAssignments(userId));
         }

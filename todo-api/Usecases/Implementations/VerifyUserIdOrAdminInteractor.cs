@@ -1,8 +1,4 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using todo_api.Data.Repos;
-using todo_api.Models;
+﻿using System.Security.Claims;
 using todo_api.Usecases.Interfaces;
 
 namespace todo_api.Usecases.Implementations

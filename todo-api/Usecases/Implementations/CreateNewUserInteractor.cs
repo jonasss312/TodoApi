@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography;
-using todo_api.Data.Repos;
+﻿using todo_api.Gateway.Interfaces;
 using todo_api.Models;
 using todo_api.Models.Dtos;
 using todo_api.Usecases.Interfaces;
@@ -8,11 +7,11 @@ namespace todo_api.Usecases.Implementations
 {
     public class CreateNewUserInteractor : CreateNewUserUC
     {
-        private UserRepo _userRepo;
+        private UsersGW _usersGW;
 
-        public CreateNewUserInteractor(UserRepo userRepo)
+        public CreateNewUserInteractor(UsersGW usersGW)
         {
-            _userRepo = userRepo;
+            _usersGW = usersGW;
         }
 
         public Task CreateNewUser(UserDto userDto, byte[] passwordHash, byte[] passwordSalt, out User newUser)
@@ -25,7 +24,7 @@ namespace todo_api.Usecases.Implementations
                 Role = Constants.USER_ROLE
             };
 
-            return _userRepo.Insert(newUser);
+            return _usersGW.Insert(newUser);
         }
     }
 }
